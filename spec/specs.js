@@ -22,12 +22,27 @@ describe('findBlendsAndDiagraphs', function() {
   });
 });
 
-describe('checkWordsBeginsStr', function() {
+describe('findWordsBeginsStr', function() {
   it("If the first three characters is str, return true", function() {
-    expect(checkWordsBeginsStr("strange")).to.equal(true);
+    expect(findWordsBeginsStr("strange")).to.equal(true);
   });
   it("If the first three characters is not str, return false", function() {
-    expect(checkWordsBeginsStr("Portland")).to.equal(false);
+    expect(findWordsBeginsStr("Portland")).to.equal(false);
+  });
+});
+
+describe('findSpecialCharacter', function() {
+  it("If the last character is special character, return true", function() {
+    expect(findSpecialCharacter("Hello?")).to.equal(true);
+  });
+  it("If the last character is special character, return false", function() {
+    expect(findSpecialCharacter("Portland")).to.equal(false);
+  });
+});
+
+describe('getLastSpecialCharacters', function() {
+  it("If the last character is special character, return it", function() {
+    expect(getLastSpecialCharacters("Hello?")).to.equal("?");
   });
 });
 
@@ -41,4 +56,7 @@ describe('PigLatinTranslator', function(){
   it("Split the sentence into string array and move the vowels and consonants to the end", function() {
     expect(PigLatinTranslator("Hello stranger")).to.eql(["elloHay", "angerstray"]);
   });
-})
+  it("Split the sentence into string array and move the special character to the end", function() {
+    expect(PigLatinTranslator("Hello stranger!")).to.eql(["elloHay", "angerstray!"]);
+  });
+});
