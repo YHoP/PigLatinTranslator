@@ -1,2 +1,1 @@
 # Pig Latin Translator
-# PigLatinTranslator
