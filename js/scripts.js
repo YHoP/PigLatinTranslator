@@ -7,12 +7,31 @@ var findVowelsAdday = function(word){
   }
 }
 
+var findFirstConsonants = function(word){
+  return (word.charAt(0).toLowerCase().match(/[bcdfghjklmnpqrstvxzwy]/gi) !== null);
+}
+
+var findBlendsAndDiagraphs = function(word){
+  var blendDiagraphArray = ["fl", "bl", "sl", "cl", "pl", "bl", "gr", "tr", "br", "cr", "dr", "pr", "fr", "wh", "sw", "sp", "sc", "sn", "sm", "sk", "st", "sh", "ch", "th", "wh", "qu"];
+  var firstTwo = word.slice(0, 2).toLowerCase();
+  return blendDiagraphArray.indexOf(firstTwo) > -1;
+}
+
+var checkWordsBeginsStr = function(word){
+  var firstThree = word.slice(0, 3).toLowerCase();
+  return (firstThree === "str");
+}
+
 var findConsonantsMoveToTheEnd = function(word){
-  if ((word.charAt(0) ==="Q" || word.charAt(0) ==="q") && word.charAt(1) ==="u"){
-    var qU = word.slice(0, 2);
+  if (checkWordsBeginsStr(word)){
+    var firstThree = word.slice(0, 3);
+    var newWord = word.slice(3);
+    return newWord.concat(firstThree);
+  }else if (findBlendsAndDiagraphs(word)){
+    var firstConsonants = word.slice(0, 2);
     var newWord = word.slice(2);
-    return newWord.concat(qU);
-  }else if (word.charAt(0).match(/[BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvxXZzWwYy]/gi)){
+    return newWord.concat(firstConsonants);
+  }else if (findFirstConsonants(word)){
     var newWord = word.slice(1);
     return newWord.concat(word.charAt(0));
   }else {
